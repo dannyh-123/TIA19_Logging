@@ -1,0 +1,78 @@
+﻿FUNCTION_BLOCK "logAnalogResetDaily"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      bMonthShift : Bool;
+      bReset : Bool;
+      bFirstScan : Bool;
+      rInValue : Real;
+      iDay : Int;
+   END_VAR
+
+   VAR_OUTPUT 
+      rLogSignal : Real;
+      rAverageSignal : Real;
+   END_VAR
+
+   VAR 
+      R_TRIG_Reset {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      R_TRIG_Month {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+   END_VAR
+   VAR RETAIN
+      aCurrentMonth : Array[1..#daysLogged] of Real;
+      aLastMonth : Array[1..#daysLogged] of Real;
+   END_VAR
+   VAR 
+      i1 : Int;
+      i2 : Int;
+      i3 : Int;
+      i4 : Int;
+   END_VAR
+
+   VAR CONSTANT 
+      daysLogged : Int := 31;
+   END_VAR
+
+
+BEGIN
+	REGION Initialize
+	    IF #bFirstScan THEN
+	        #rLogSignal := 0.0;
+	        #rAverageSignal := 0.0;
+	        FOR #i4 := 1 TO #daysLogged DO
+	            #aCurrentMonth[#i4] := 0.0;
+	            #aLastMonth[#i4] := 0.0;
+	        END_FOR;
+	    END_IF;
+	END_REGION ;
+	
+	// Catch rising edges and create pulse
+	#R_TRIG_Reset(CLK := #bReset);
+	#R_TRIG_Month(CLK:=#bMonthShift);
+	
+	
+	REGION Loop log values
+	    IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
+	        #aCurrentMonth[#iDay] := #rInValue;
+	        #rAverageSignal := 0.0;
+	        
+	        FOR #i2 := 1 TO #daysLogged BY 1 DO //Calculate average signal
+	            #rAverageSignal := #rAverageSignal + #aCurrentMonth[#i2];
+	        END_FOR;
+	        #rAverageSignal := #rAverageSignal / (#daysLogged);
+	    END_IF;
+	END_REGION
+	
+	REGION New month
+	    IF #R_TRIG_Month.Q THEN
+	        #aLastMonth := #aCurrentMonth;
+	        FOR #i3 := 1 TO #daysLogged BY 1 DO
+	            #aCurrentMonth[#i3] := 0.0;
+	        END_FOR;
+	    END_IF;
+	END_REGION
+	
+	#rLogSignal := #rInValue;
+	
+END_FUNCTION_BLOCK
+

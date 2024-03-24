@@ -1,0 +1,100 @@
+﻿FUNCTION_BLOCK "logSignalResetDaily"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      bReset : Bool;
+      bMonthShift : Bool;
+      bLogSignal : Bool;
+      bFirstScan : Bool;
+      iDay : Int;
+   END_VAR
+
+   VAR_OUTPUT 
+      iCntLogSignal : Real := 0.0;
+      iCntAverageSignal : Real := 0.0;
+   END_VAR
+
+   VAR 
+      R_TRIG_Signal {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+   END_VAR
+   VAR RETAIN
+      IEC_Counter_Signal {InstructionName := 'CTU_INT'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; S7_SetPoint := 'False'} : CTU_INT;
+   END_VAR
+   VAR 
+      R_TRIG_Reset {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      aCurrentMonth : Array[1..#daysLogged] of Real;
+      aLastMonth : Array[1..#daysLogged] of Real;
+      i1 : Int;
+      i2 : Int;
+      i3 : Int;
+      i4 : Int;
+      R_TRIG_Month {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+   END_VAR
+
+   VAR CONSTANT 
+      daysLogged : Int := 31;
+      maxCount : Int := 3000;
+   END_VAR
+
+
+BEGIN
+	REGION Initialize
+	    IF #bFirstScan THEN
+	        #iCntLogSignal := 0.0;
+	        #iCntAverageSignal := 0.0;
+	        FOR #i4 := 1 TO #daysLogged DO
+	            #aCurrentMonth[#i4] := 0.0;
+	            #aLastMonth[#i4] := 0.0;
+	        END_FOR;
+	    END_IF;
+	END_REGION ;
+	
+	#R_TRIG_Reset(CLK := #bReset);
+	#R_TRIG_Month(CLK:=#bMonthShift);
+	
+	(*
+	REGION Loop log values
+	    IF #R_TRIG_Reset.Q THEN
+	        FOR #i1 := #daysLogged TO 2 BY -1 DO // Iterate from the last index to the second index
+	            #aCurrentMonth[#i1] := #aCurrentMonth[#i1 - 1]; // Shift elements to the right
+	        END_FOR;
+	        #aCurrentMonth[1] := #iCntLogSignal;
+	        
+	        #iCntAverageSignal := 0.0;
+	        FOR #i2 := 1 TO #daysLogged BY 1 DO
+	            #iCntAverageSignal := #iCntAverageSignal + #aCurrentMonth[#i2];
+	        END_FOR;
+	        #iCntAverageSignal := #iCntAverageSignal / (#daysLogged);
+	    END_IF;
+	END_REGION
+	*)
+	
+	IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
+	    
+	    #aCurrentMonth[#iDay] := #iCntLogSignal;
+	    #iCntAverageSignal := 0.0;
+	    
+	    FOR #i2 := 1 TO #daysLogged BY 1 DO
+	        #iCntAverageSignal := #iCntAverageSignal + #aCurrentMonth[#i2];
+	    END_FOR;
+	    #iCntAverageSignal := #iCntAverageSignal / (#daysLogged);
+	END_IF;
+	
+	REGION New month
+	    IF #R_TRIG_Month.Q THEN
+	        #aLastMonth := #aCurrentMonth;
+	        FOR #i3 := 1 TO #daysLogged BY 1 DO
+	            #aCurrentMonth[#i3] := 0.0;
+	        END_FOR;
+	    END_IF;
+	END_REGION
+	
+	#R_TRIG_Signal(CLK := #bLogSignal);
+	
+	#IEC_Counter_Signal(CU := #R_TRIG_Signal.Q,
+	                    R := #R_TRIG_Reset.Q,
+	                    PV := #maxCount,
+	                    CV => #iCntLogSignal);
+	
+END_FUNCTION_BLOCK
+

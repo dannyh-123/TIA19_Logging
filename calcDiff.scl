@@ -1,0 +1,75 @@
+﻿FUNCTION_BLOCK "calcDiff"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      aMotherCores : Array[1..#daysLogged] of Real;
+      aSetsProduced : Array[1..#daysLogged] of Real;
+      bTrigger : Bool;
+      bMonthShift : Bool;
+      bFirstScan : Bool;
+      iDay : Int;
+   END_VAR
+
+   VAR_OUTPUT 
+      aDiffToday : Real;
+      aDiffYesterday : Real;
+   END_VAR
+
+   VAR 
+      aDifferenceCurrentLast : Array[1..#daysLogged] of Real;
+      aDifferenceCurrent : Array[1..#daysLogged] of Real;
+      R_TRIG_Reset {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      R_TRIG_Month {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      i3 : Int;
+      i4 : Int;
+   END_VAR
+
+   VAR CONSTANT 
+      daysLogged : Int := 31;
+   END_VAR
+
+
+BEGIN
+	REGION Initialize
+	    IF #bFirstScan THEN
+	        FOR #i4 := 1 TO #daysLogged DO
+	            #aDifferenceCurrent[#i4] := 0.0;
+	            #aDifferenceCurrentLast[#i4] := 0.0;
+	        END_FOR;
+	    END_IF;
+	END_REGION;
+	
+	#R_TRIG_Reset(CLK := #bTrigger);
+	#R_TRIG_Month(CLK := #bMonthShift);
+	
+	REGION Loop log values
+	IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
+	    IF #aSetsProduced[#iDay] <> 0 AND #aMotherCores[#iDay] <> 0 THEN
+	        #aDifferenceCurrent[#iDay] := #aSetsProduced[#iDay] / #aMotherCores[#iDay];
+	        //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
+	        //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
+	    END_IF;
+	END_IF;
+	END_REGION
+	
+	REGION New month
+	IF #R_TRIG_Month.Q THEN
+	    #aDifferenceCurrentLast := #aDifferenceCurrent;
+	    FOR #i3 := 1 TO #daysLogged BY 1 DO
+	        #aDifferenceCurrent[#i3] := 0.0;
+	    END_FOR;
+	END_IF;
+	END_REGION
+	
+	IF #iDay <> 0 AND #iDay <= 31 THEN
+	    #aDiffToday := #aDifferenceCurrent[#iDay];
+	    
+	    IF #iDay > 1 THEN
+	        #aDiffYesterday := #aDifferenceCurrent[#iDay - 1];
+	    ELSIF #iDay = 1 THEN
+	        #aDiffYesterday := #aDifferenceCurrent[#iDay + 30];
+	    END_IF;
+	END_IF;
+	
+END_FUNCTION_BLOCK
+

@@ -1,0 +1,63 @@
+﻿FUNCTION_BLOCK "pulseDayAndMonth"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      bClock : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      bPulseMidnight : Bool;
+      bPulseNewMonth : Bool;
+      iSecond : Int;
+      iDay : Int;
+   END_VAR
+
+   VAR 
+      R_TRIG_Midnight {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      R_TRIG_Month {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      R_TRIG_Second {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
+      NowTime {InstructionName := 'DTL'; LibVersion := '1.0'; S7_SetPoint := 'True'} : DTL;
+      bClockPulse : Bool;
+      iMonth : Int;
+      iMonthMemory : Int;
+      iHour : Int;
+      iMinute : Int;
+      bMidnight : Bool;
+      bNewMonth : Bool;
+      iTrigSecond { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int := 1;
+   END_VAR
+
+   VAR_TEMP 
+      iReturn : Int;
+   END_VAR
+
+   VAR CONSTANT 
+      iTrigHour : Int := 12;
+      iTrigMinute : Int := 9;
+   END_VAR
+
+
+BEGIN
+	#R_TRIG_Second(CLK := #bClock,
+	               Q => #bClockPulse);
+	
+	IF #bClockPulse THEN
+	    #iReturn := RD_LOC_T(#NowTime);
+	    #iMonth := #NowTime.MONTH;
+	    #iDay := #NowTime.DAY;
+	    #iHour := #NowTime.HOUR;
+	    #iMinute := #NowTime.MINUTE;
+	    #iSecond := #NowTime.SECOND;
+	    
+	    #bNewMonth := (#iMonth <> #iMonthMemory);
+	    #iMonthMemory := #iMonth;
+	    
+	    #bMidnight := (#iHour = #iTrigHour AND #iMinute = #iTrigMinute AND #iSecond <= #iTrigSecond);
+	END_IF;
+	
+	#R_TRIG_Midnight(CLK := #bMidnight, Q => #bPulseMidnight);
+	#R_TRIG_Month(CLK := #bNewMonth, Q => #bPulseNewMonth);
+	
+	
+END_FUNCTION_BLOCK
+
