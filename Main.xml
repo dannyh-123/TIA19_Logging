@@ -257,31 +257,33 @@
     </Access>
     <Access Scope="GlobalVariable" UId="27">
       <Symbol>
-        <Component Name="bTestFirstScan" />
+        <Component Name="bPulsa" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="28">
       <Symbol>
-        <Component Name="FirstScan" />
+        <Component Name="bTestFirstScan" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="29">
+      <Symbol>
+        <Component Name="FirstScan" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="30">
       <Symbol>
         <Component Name="Data" />
         <Component Name="Day" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="30">
+    <Access Scope="GlobalVariable" UId="31">
       <Symbol>
         <Component Name="Data" />
         <Component Name="setsProduced" />
         <Component Name="Current" />
       </Symbol>
     </Access>
-    <Part Name="O" UId="31">
-      <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
-    </Part>
-    <Part Name="O" UId="32">
+    <Part Name="A" UId="32">
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Part Name="O" UId="33">
@@ -290,9 +292,15 @@
     <Part Name="O" UId="34">
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
-    <Call UId="35">
+    <Part Name="A" UId="35">
+      <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+    </Part>
+    <Part Name="O" UId="36">
+      <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+    </Part>
+    <Call UId="37">
       <CallInfo Name="logSignalResetDaily" BlockType="FB">
-        <Instance Scope="GlobalVariable" UId="36">
+        <Instance Scope="GlobalVariable" UId="38">
           <Component Name="logSignalResetDaily_DB" />
         </Instance>
         <Parameter Name="bReset" Section="Input" Type="Bool" />
@@ -307,73 +315,81 @@
     </Call>
   </Parts>
   <Wires>
-    <Wire UId="40">
-      <IdentCon UId="21" />
-      <NameCon UId="31" Name="in1" />
-    </Wire>
-    <Wire UId="41">
-      <IdentCon UId="22" />
-      <NameCon UId="31" Name="in2" />
-    </Wire>
     <Wire UId="42">
-      <NameCon UId="31" Name="out" />
+      <IdentCon UId="21" />
       <NameCon UId="32" Name="in1" />
     </Wire>
     <Wire UId="43">
-      <IdentCon UId="23" />
+      <IdentCon UId="22" />
       <NameCon UId="32" Name="in2" />
     </Wire>
     <Wire UId="44">
       <NameCon UId="32" Name="out" />
-      <NameCon UId="35" Name="bReset" />
-    </Wire>
-    <Wire UId="45">
-      <IdentCon UId="25" />
       <NameCon UId="33" Name="in1" />
     </Wire>
-    <Wire UId="46">
-      <IdentCon UId="26" />
+    <Wire UId="45">
+      <IdentCon UId="23" />
       <NameCon UId="33" Name="in2" />
     </Wire>
-    <Wire UId="47">
+    <Wire UId="46">
       <NameCon UId="33" Name="out" />
-      <NameCon UId="35" Name="bLogSignal" />
+      <NameCon UId="37" Name="bReset" />
+    </Wire>
+    <Wire UId="47">
+      <IdentCon UId="26" />
+      <NameCon UId="34" Name="in1" />
     </Wire>
     <Wire UId="48">
       <IdentCon UId="27" />
-      <NameCon UId="34" Name="in1" />
-    </Wire>
-    <Wire UId="49">
-      <IdentCon UId="28" />
       <NameCon UId="34" Name="in2" />
     </Wire>
-    <Wire UId="50">
+    <Wire UId="49">
       <NameCon UId="34" Name="out" />
-      <NameCon UId="35" Name="bFirstScan" />
+      <NameCon UId="35" Name="in2" />
+    </Wire>
+    <Wire UId="50">
+      <IdentCon UId="25" />
+      <NameCon UId="35" Name="in1" />
     </Wire>
     <Wire UId="51">
-      <OpenCon UId="37" />
-      <NameCon UId="35" Name="en" />
+      <NameCon UId="35" Name="out" />
+      <NameCon UId="37" Name="bLogSignal" />
     </Wire>
     <Wire UId="52">
-      <IdentCon UId="24" />
-      <NameCon UId="35" Name="bMonthShift" />
+      <IdentCon UId="28" />
+      <NameCon UId="36" Name="in1" />
     </Wire>
     <Wire UId="53">
       <IdentCon UId="29" />
-      <NameCon UId="35" Name="iDay" />
+      <NameCon UId="36" Name="in2" />
     </Wire>
     <Wire UId="54">
-      <NameCon UId="35" Name="aCurrentMonth" />
-      <IdentCon UId="30" />
+      <NameCon UId="36" Name="out" />
+      <NameCon UId="37" Name="bFirstScan" />
     </Wire>
     <Wire UId="55">
-      <NameCon UId="35" Name="iCntLogSignal" />
-      <OpenCon UId="38" />
+      <OpenCon UId="39" />
+      <NameCon UId="37" Name="en" />
     </Wire>
     <Wire UId="56">
-      <NameCon UId="35" Name="iCntAverageSignal" />
-      <OpenCon UId="39" />
+      <IdentCon UId="24" />
+      <NameCon UId="37" Name="bMonthShift" />
+    </Wire>
+    <Wire UId="57">
+      <IdentCon UId="30" />
+      <NameCon UId="37" Name="iDay" />
+    </Wire>
+    <Wire UId="58">
+      <NameCon UId="37" Name="aCurrentMonth" />
+      <IdentCon UId="31" />
+    </Wire>
+    <Wire UId="59">
+      <NameCon UId="37" Name="iCntLogSignal" />
+      <OpenCon UId="40" />
+    </Wire>
+    <Wire UId="60">
+      <NameCon UId="37" Name="iCntAverageSignal" />
+      <OpenCon UId="41" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
@@ -455,7 +471,7 @@
         <Component Name="Current" />
       </Symbol>
     </Access>
-    <Part Name="O" UId="30">
+    <Part Name="A" UId="30">
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Part Name="O" UId="31">
@@ -622,7 +638,7 @@
         <Component Name="Day" />
       </Symbol>
     </Access>
-    <Part Name="O" UId="30">
+    <Part Name="A" UId="30">
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Part Name="O" UId="31">
@@ -737,7 +753,92 @@
       </SW.Blocks.CompileUnit>
       <SW.Blocks.CompileUnit ID="1C" CompositionName="CompileUnits">
         <AttributeList>
-          <NetworkSource />
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Slump" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="22">
+      <Constant>
+        <ConstantType>UDInt</ConstantType>
+        <ConstantValue>10000000</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Slump2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="R_TRIG_DB" />
+        <Component Name="Q" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Slump" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="Clock_1Hz" />
+      </Symbol>
+    </Access>
+    <Part Name="Div" UId="27" DisabledENO="true">
+      <AutomaticTyped Name="SrcType" />
+    </Part>
+    <Part Name="Random" Version="1.0" UId="28" />
+    <Part Name="R_TRIG" Version="1.0" UId="29">
+      <Instance Scope="GlobalVariable" UId="30">
+        <Component Name="R_TRIG_DB" />
+      </Instance>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="34">
+      <OpenCon UId="31" />
+      <NameCon UId="27" Name="en" />
+    </Wire>
+    <Wire UId="35">
+      <IdentCon UId="21" />
+      <NameCon UId="27" Name="in1" />
+    </Wire>
+    <Wire UId="36">
+      <IdentCon UId="22" />
+      <NameCon UId="27" Name="in2" />
+    </Wire>
+    <Wire UId="37">
+      <NameCon UId="27" Name="out" />
+      <IdentCon UId="23" />
+    </Wire>
+    <Wire UId="38">
+      <IdentCon UId="24" />
+      <NameCon UId="28" Name="en" />
+    </Wire>
+    <Wire UId="39">
+      <NameCon UId="28" Name="Ret_Val" />
+      <IdentCon UId="25" />
+    </Wire>
+    <Wire UId="40">
+      <OpenCon UId="32" />
+      <NameCon UId="29" Name="en" />
+    </Wire>
+    <Wire UId="41">
+      <IdentCon UId="26" />
+      <NameCon UId="29" Name="CLK" />
+    </Wire>
+    <Wire UId="42">
+      <NameCon UId="29" Name="Q" />
+      <OpenCon UId="33" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
           <ProgrammingLanguage>FBD</ProgrammingLanguage>
         </AttributeList>
         <ObjectList>
@@ -763,9 +864,37 @@
           </MultilingualText>
         </ObjectList>
       </SW.Blocks.CompileUnit>
-      <MultilingualText ID="21" CompositionName="Title">
+      <SW.Blocks.CompileUnit ID="21" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource />
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
         <ObjectList>
-          <MultilingualTextItem ID="22" CompositionName="Items">
+          <MultilingualText ID="22" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="26" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="27" CompositionName="Items">
             <AttributeList>
               <Culture>en-US</Culture>
               <Text>"Main Program Sweep (Cycle)"</Text>

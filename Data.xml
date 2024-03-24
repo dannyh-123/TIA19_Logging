@@ -17,6 +17,12 @@
         <BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute>
       </AttributeList>
     </Member>
+    <Member Name="Slump" Datatype="UDInt">
+      <AttributeList>
+        <BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute>
+      </AttributeList>
+    </Member>
+    <Member Name="Slump2" Datatype="Int" />
   </Section>
 </Sections></Interface>
       <MemoryLayout>Optimized</MemoryLayout>
