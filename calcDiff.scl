@@ -37,28 +37,28 @@ BEGIN
 	            #aDifferenceCurrentLast[#i4] := 0.0;
 	        END_FOR;
 	    END_IF;
-	END_REGION;
+	END_REGION ;
 	
 	#R_TRIG_Reset(CLK := #bTrigger);
 	#R_TRIG_Month(CLK := #bMonthShift);
 	
 	REGION Loop log values
-	IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
-	    IF #aSetsProduced[#iDay] <> 0 AND #aMotherCores[#iDay] <> 0 THEN
-	        #aDifferenceCurrent[#iDay] := #aSetsProduced[#iDay] / #aMotherCores[#iDay];
-	        //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
-	        //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
+	    IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
+	        IF #aSetsProduced[#iDay] <> 0 AND #aMotherCores[#iDay] <> 0 THEN
+	            #aDifferenceCurrent[#iDay] := #aSetsProduced[#iDay] / #aMotherCores[#iDay];
+	            //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
+	            //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
+	        END_IF;
 	    END_IF;
-	END_IF;
 	END_REGION
 	
 	REGION New month
-	IF #R_TRIG_Month.Q THEN
-	    #aDifferenceCurrentLast := #aDifferenceCurrent;
-	    FOR #i3 := 1 TO #daysLogged BY 1 DO
-	        #aDifferenceCurrent[#i3] := 0.0;
-	    END_FOR;
-	END_IF;
+	    IF #R_TRIG_Month.Q THEN
+	        #aDifferenceCurrentLast := #aDifferenceCurrent;
+	        FOR #i3 := 1 TO #daysLogged BY 1 DO
+	            #aDifferenceCurrent[#i3] := 0.0;
+	        END_FOR;
+	    END_IF;
 	END_REGION
 	
 	IF #iDay <> 0 AND #iDay <= 31 THEN

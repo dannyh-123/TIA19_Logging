@@ -10,6 +10,7 @@ VERSION : 0.1
    END_VAR
 
    VAR_OUTPUT 
+      aCurrentMonth : Array[1..#maxDays] of Real;
       iCntLogSignal : Real := 0.0;
       iCntAverageSignal : Real := 0.0;
    END_VAR
@@ -22,8 +23,7 @@ VERSION : 0.1
    END_VAR
    VAR 
       R_TRIG_Reset {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
-      aCurrentMonth : Array[1..#daysLogged] of Real;
-      aLastMonth : Array[1..#daysLogged] of Real;
+      aLastMonth : Array[1..#maxDays] of Real;
       i1 : Int;
       i2 : Int;
       i3 : Int;
@@ -32,7 +32,7 @@ VERSION : 0.1
    END_VAR
 
    VAR CONSTANT 
-      daysLogged : Int := 31;
+      maxDays : Int := 31;
       maxCount : Int := 3000;
    END_VAR
 
@@ -42,7 +42,7 @@ BEGIN
 	    IF #bFirstScan THEN
 	        #iCntLogSignal := 0.0;
 	        #iCntAverageSignal := 0.0;
-	        FOR #i4 := 1 TO #daysLogged DO
+	        FOR #i4 := 1 TO #maxDays DO
 	            #aCurrentMonth[#i4] := 0.0;
 	            #aLastMonth[#i4] := 0.0;
 	        END_FOR;
@@ -50,7 +50,7 @@ BEGIN
 	END_REGION ;
 	
 	#R_TRIG_Reset(CLK := #bReset);
-	#R_TRIG_Month(CLK:=#bMonthShift);
+	#R_TRIG_Month(CLK := #bMonthShift);
 	
 	(*
 	REGION Loop log values
@@ -69,21 +69,21 @@ BEGIN
 	END_REGION
 	*)
 	
-	IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
+	IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #maxDays THEN
 	    
 	    #aCurrentMonth[#iDay] := #iCntLogSignal;
 	    #iCntAverageSignal := 0.0;
 	    
-	    FOR #i2 := 1 TO #daysLogged BY 1 DO
+	    FOR #i2 := 1 TO #maxDays BY 1 DO
 	        #iCntAverageSignal := #iCntAverageSignal + #aCurrentMonth[#i2];
 	    END_FOR;
-	    #iCntAverageSignal := #iCntAverageSignal / (#daysLogged);
+	    #iCntAverageSignal := #iCntAverageSignal / (#maxDays);
 	END_IF;
 	
 	REGION New month
 	    IF #R_TRIG_Month.Q THEN
 	        #aLastMonth := #aCurrentMonth;
-	        FOR #i3 := 1 TO #daysLogged BY 1 DO
+	        FOR #i3 := 1 TO #maxDays BY 1 DO
 	            #aCurrentMonth[#i3] := 0.0;
 	        END_FOR;
 	    END_IF;

@@ -55,8 +55,10 @@ BEGIN
 	    #bMidnight := (#iHour = #iTrigHour AND #iMinute = #iTrigMinute AND #iSecond <= #iTrigSecond);
 	END_IF;
 	
-	#R_TRIG_Midnight(CLK := #bMidnight, Q => #bPulseMidnight);
-	#R_TRIG_Month(CLK := #bNewMonth, Q => #bPulseNewMonth);
+	#R_TRIG_Midnight(CLK := #bMidnight,
+	                 Q => #bPulseMidnight);
+	#R_TRIG_Month(CLK := #bNewMonth,
+	              Q => #bPulseNewMonth);
 	
 	
 END_FUNCTION_BLOCK
