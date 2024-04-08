@@ -1,4 +1,4 @@
-﻿FUNCTION_BLOCK "logAnalog2Months"
+﻿FUNCTION_BLOCK "logAnalogDaily2Months"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 

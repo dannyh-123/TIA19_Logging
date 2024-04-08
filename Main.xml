@@ -320,7 +320,7 @@
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Call UId="37">
-      <CallInfo Name="logBoolean2Months" BlockType="FB">
+      <CallInfo Name="logBoolCount2Months" BlockType="FB">
         <Instance Scope="GlobalVariable" UId="38">
           <Component Name="logSignalResetDaily_DB" />
         </Instance>
@@ -501,7 +501,7 @@
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Call UId="33">
-      <CallInfo Name="logAnalog2Months" BlockType="FB">
+      <CallInfo Name="logAnalogDaily2Months" BlockType="FB">
         <Instance Scope="GlobalVariable" UId="34">
           <Component Name="logAnalogResetDaily_DB" />
         </Instance>

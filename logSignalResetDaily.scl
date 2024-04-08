@@ -1,4 +1,4 @@
-﻿FUNCTION_BLOCK "logBoolean2Months"
+﻿FUNCTION_BLOCK "logBoolCount2Months"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 
