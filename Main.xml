@@ -42,21 +42,19 @@
         <AttributeList>
           <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
   <Parts>
-    <Access Scope="LiteralConstant" UId="21">
-      <Constant>
-        <ConstantType>Bool</ConstantType>
-        <ConstantValue>1</ConstantValue>
-      </Constant>
-    </Access>
-    <Access Scope="GlobalVariable" UId="22">
-      <Symbol>
-        <Component Name="bTEstREset" />
-      </Symbol>
-    </Access>
-    <Access Scope="GlobalVariable" UId="23">
+    <Access Scope="GlobalVariable" UId="21">
       <Symbol>
         <Component Name="Clock_1Hz" />
       </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Day" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalConstant" UId="23">
+      <Constant Name="MAX_DAYS_IN_MONTH" />
     </Access>
     <Access Scope="GlobalVariable" UId="24">
       <Symbol>
@@ -64,75 +62,57 @@
         <Component Name="Day" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalConstant" UId="25">
-      <Constant Name="MAX_DAYS_IN_MONTH" />
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Day" />
+      </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="26">
-      <Symbol>
-        <Component Name="Data" />
-        <Component Name="Day" />
-      </Symbol>
-    </Access>
-    <Access Scope="GlobalVariable" UId="27">
-      <Symbol>
-        <Component Name="Data" />
-        <Component Name="Day" />
-      </Symbol>
-    </Access>
-    <Access Scope="GlobalVariable" UId="28">
       <Symbol>
         <Component Name="bTestMonthShift" />
       </Symbol>
     </Access>
-    <Part Name="Coil" UId="29" />
-    <Part Name="Ge" UId="30">
+    <Part Name="Ge" UId="27">
       <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
     </Part>
-    <Part Name="CTU" Version="1.0" UId="31">
-      <Instance Scope="GlobalVariable" UId="32">
+    <Part Name="CTU" Version="1.0" UId="28">
+      <Instance Scope="GlobalVariable" UId="29">
         <Component Name="IEC_Counter_0_DB1" />
       </Instance>
       <TemplateValue Name="value_type" Type="Type">Int</TemplateValue>
     </Part>
-    <Part Name="Coil" UId="33" />
+    <Part Name="Coil" UId="30" />
   </Parts>
   <Wires>
+    <Wire UId="31">
+      <IdentCon UId="22" />
+      <NameCon UId="27" Name="in1" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="23" />
+      <NameCon UId="27" Name="in2" />
+    </Wire>
+    <Wire UId="33">
+      <NameCon UId="27" Name="out" />
+      <NameCon UId="28" Name="R" />
+      <NameCon UId="30" Name="in" />
+    </Wire>
     <Wire UId="34">
       <IdentCon UId="21" />
-      <NameCon UId="29" Name="in" />
+      <NameCon UId="28" Name="CU" />
     </Wire>
     <Wire UId="35">
-      <IdentCon UId="22" />
-      <NameCon UId="29" Name="operand" />
+      <IdentCon UId="24" />
+      <NameCon UId="28" Name="PV" />
     </Wire>
     <Wire UId="36">
-      <IdentCon UId="24" />
-      <NameCon UId="30" Name="in1" />
+      <NameCon UId="28" Name="CV" />
+      <IdentCon UId="25" />
     </Wire>
     <Wire UId="37">
-      <IdentCon UId="25" />
-      <NameCon UId="30" Name="in2" />
-    </Wire>
-    <Wire UId="38">
-      <NameCon UId="30" Name="out" />
-      <NameCon UId="31" Name="R" />
-      <NameCon UId="33" Name="in" />
-    </Wire>
-    <Wire UId="39">
-      <IdentCon UId="23" />
-      <NameCon UId="31" Name="CU" />
-    </Wire>
-    <Wire UId="40">
       <IdentCon UId="26" />
-      <NameCon UId="31" Name="PV" />
-    </Wire>
-    <Wire UId="41">
-      <NameCon UId="31" Name="CV" />
-      <IdentCon UId="27" />
-    </Wire>
-    <Wire UId="42">
-      <IdentCon UId="28" />
-      <NameCon UId="33" Name="operand" />
+      <NameCon UId="30" Name="operand" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
@@ -176,9 +156,20 @@
         <Component Name="Second" />
       </Symbol>
     </Access>
-    <Call UId="23">
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Bool</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="bTEstREset" />
+      </Symbol>
+    </Access>
+    <Call UId="25">
       <CallInfo Name="pulseDayAndMonth" BlockType="FB">
-        <Instance Scope="GlobalVariable" UId="24">
+        <Instance Scope="GlobalVariable" UId="26">
           <Component Name="pulseDayAndMonth_DB" />
         </Instance>
         <Parameter Name="bClock" Section="Input" Type="Bool" />
@@ -188,31 +179,40 @@
         <Parameter Name="iDay" Section="Output" Type="Int" />
       </CallInfo>
     </Call>
+    <Part Name="Coil" UId="27" />
   </Parts>
   <Wires>
-    <Wire UId="29">
-      <OpenCon UId="25" />
-      <NameCon UId="23" Name="en" />
-    </Wire>
-    <Wire UId="30">
-      <IdentCon UId="21" />
-      <NameCon UId="23" Name="bClock" />
-    </Wire>
-    <Wire UId="31">
-      <NameCon UId="23" Name="bPulseMidnight" />
-      <OpenCon UId="26" />
-    </Wire>
     <Wire UId="32">
-      <NameCon UId="23" Name="bPulseNewMonth" />
-      <OpenCon UId="27" />
+      <OpenCon UId="28" />
+      <NameCon UId="25" Name="en" />
     </Wire>
     <Wire UId="33">
-      <NameCon UId="23" Name="iSecond" />
-      <IdentCon UId="22" />
+      <IdentCon UId="21" />
+      <NameCon UId="25" Name="bClock" />
     </Wire>
     <Wire UId="34">
-      <NameCon UId="23" Name="iDay" />
-      <OpenCon UId="28" />
+      <NameCon UId="25" Name="bPulseMidnight" />
+      <OpenCon UId="29" />
+    </Wire>
+    <Wire UId="35">
+      <NameCon UId="25" Name="bPulseNewMonth" />
+      <OpenCon UId="30" />
+    </Wire>
+    <Wire UId="36">
+      <NameCon UId="25" Name="iSecond" />
+      <IdentCon UId="22" />
+    </Wire>
+    <Wire UId="37">
+      <NameCon UId="25" Name="iDay" />
+      <OpenCon UId="31" />
+    </Wire>
+    <Wire UId="38">
+      <IdentCon UId="23" />
+      <NameCon UId="27" Name="in" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="24" />
+      <NameCon UId="27" Name="operand" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
