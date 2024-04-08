@@ -1,4 +1,4 @@
-﻿FUNCTION_BLOCK "logSignalResetDaily"
+﻿FUNCTION_BLOCK "logBoolean2Months"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 
@@ -51,23 +51,6 @@ BEGIN
 	
 	#R_TRIG_Reset(CLK := #bReset);
 	#R_TRIG_Month(CLK := #bMonthShift);
-	
-	(*
-	REGION Loop log values
-	    IF #R_TRIG_Reset.Q THEN
-	        FOR #i1 := #daysLogged TO 2 BY -1 DO // Iterate from the last index to the second index
-	            #aCurrentMonth[#i1] := #aCurrentMonth[#i1 - 1]; // Shift elements to the right
-	        END_FOR;
-	        #aCurrentMonth[1] := #iCntLogSignal;
-	        
-	        #iCntAverageSignal := 0.0;
-	        FOR #i2 := 1 TO #daysLogged BY 1 DO
-	            #iCntAverageSignal := #iCntAverageSignal + #aCurrentMonth[#i2];
-	        END_FOR;
-	        #iCntAverageSignal := #iCntAverageSignal / (#daysLogged);
-	    END_IF;
-	END_REGION
-	*)
 	
 	IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #maxDays THEN
 	    

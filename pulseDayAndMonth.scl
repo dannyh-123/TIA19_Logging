@@ -32,8 +32,8 @@ VERSION : 0.1
    END_VAR
 
    VAR CONSTANT 
-      iTrigHour : Int := 12;
-      iTrigMinute : Int := 9;
+      iTrigHour : Int := 6;
+      iTrigMinute : Int := 0;
    END_VAR
 
 

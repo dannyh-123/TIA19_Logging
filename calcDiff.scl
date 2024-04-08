@@ -25,7 +25,7 @@ VERSION : 0.1
    END_VAR
 
    VAR_TEMP 
-      iTest : Real;
+      itempStorage : Real;
    END_VAR
 
    VAR CONSTANT 
@@ -50,8 +50,8 @@ BEGIN
 	    IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #daysLogged THEN
 	        IF #aSetsProduced[#iDay] <> 0 AND #aMotherCores[#iDay] <> 0 THEN
 	            //#aDifferenceCurrent[#iDay] := #aSetsProduced[#iDay] / #aMotherCores[#iDay];
-	            #iTest := (ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay])));
-	            #aDifferenceCurrent[#iDay] := #iTest / 100;
+	            #itempStorage := (ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay])));
+	            #aDifferenceCurrent[#iDay] := #itempStorage / 100;
 	            //#aDifferenceCurrent[#iDay] := ROUND(IN := 100 * (#aSetsProduced[#iDay] / #aMotherCores[#iDay]))/100;
 	        END_IF;
 	    END_IF;

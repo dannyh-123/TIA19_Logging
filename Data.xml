@@ -23,6 +23,20 @@
       </AttributeList>
     </Member>
     <Member Name="Slump2" Datatype="Int" />
+    <Member Name="log_parameter" Datatype="&quot;LGF_typeDataLogParameter&quot;">
+      <Sections>
+        <Section Name="None">
+          <Member Name="maxNumberOfEntries" Datatype="UDInt">
+            <StartValue>100</StartValue>
+          </Member>
+        </Section>
+      </Sections>
+    </Member>
+    <Member Name="clock" Datatype="Bool">
+      <AttributeList>
+        <BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute>
+      </AttributeList>
+    </Member>
   </Section>
 </Sections></Interface>
       <MemoryLayout>Optimized</MemoryLayout>

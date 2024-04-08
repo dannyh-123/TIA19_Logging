@@ -42,19 +42,21 @@
         <AttributeList>
           <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
   <Parts>
-    <Access Scope="GlobalVariable" UId="21">
-      <Symbol>
-        <Component Name="Clock_1Hz" />
-      </Symbol>
+    <Access Scope="LiteralConstant" UId="21">
+      <Constant>
+        <ConstantType>Bool</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
     </Access>
     <Access Scope="GlobalVariable" UId="22">
       <Symbol>
-        <Component Name="Data" />
-        <Component Name="Day" />
+        <Component Name="bTEstREset" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalConstant" UId="23">
-      <Constant Name="MAX_DAYS_IN_MONTH" />
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="Clock_1Hz" />
+      </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="24">
       <Symbol>
@@ -62,57 +64,75 @@
         <Component Name="Day" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="25">
+    <Access Scope="GlobalConstant" UId="25">
+      <Constant Name="MAX_DAYS_IN_MONTH" />
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
       <Symbol>
         <Component Name="Data" />
         <Component Name="Day" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="26">
+    <Access Scope="GlobalVariable" UId="27">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Day" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="28">
       <Symbol>
         <Component Name="bTestMonthShift" />
       </Symbol>
     </Access>
-    <Part Name="Ge" UId="27">
+    <Part Name="Coil" UId="29" />
+    <Part Name="Ge" UId="30">
       <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
     </Part>
-    <Part Name="CTU" Version="1.0" UId="28">
-      <Instance Scope="GlobalVariable" UId="29">
-        <Component Name="IEC_Counter_0_DB" />
+    <Part Name="CTU" Version="1.0" UId="31">
+      <Instance Scope="GlobalVariable" UId="32">
+        <Component Name="IEC_Counter_0_DB1" />
       </Instance>
       <TemplateValue Name="value_type" Type="Type">Int</TemplateValue>
     </Part>
-    <Part Name="Coil" UId="30" />
+    <Part Name="Coil" UId="33" />
   </Parts>
   <Wires>
-    <Wire UId="31">
-      <IdentCon UId="22" />
-      <NameCon UId="27" Name="in1" />
-    </Wire>
-    <Wire UId="32">
-      <IdentCon UId="23" />
-      <NameCon UId="27" Name="in2" />
-    </Wire>
-    <Wire UId="33">
-      <NameCon UId="27" Name="out" />
-      <NameCon UId="28" Name="R" />
-      <NameCon UId="30" Name="in" />
-    </Wire>
     <Wire UId="34">
       <IdentCon UId="21" />
-      <NameCon UId="28" Name="CU" />
+      <NameCon UId="29" Name="in" />
     </Wire>
     <Wire UId="35">
-      <IdentCon UId="24" />
-      <NameCon UId="28" Name="PV" />
+      <IdentCon UId="22" />
+      <NameCon UId="29" Name="operand" />
     </Wire>
     <Wire UId="36">
-      <NameCon UId="28" Name="CV" />
-      <IdentCon UId="25" />
+      <IdentCon UId="24" />
+      <NameCon UId="30" Name="in1" />
     </Wire>
     <Wire UId="37">
+      <IdentCon UId="25" />
+      <NameCon UId="30" Name="in2" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="30" Name="out" />
+      <NameCon UId="31" Name="R" />
+      <NameCon UId="33" Name="in" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="23" />
+      <NameCon UId="31" Name="CU" />
+    </Wire>
+    <Wire UId="40">
       <IdentCon UId="26" />
-      <NameCon UId="30" Name="operand" />
+      <NameCon UId="31" Name="PV" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="31" Name="CV" />
+      <IdentCon UId="27" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="28" />
+      <NameCon UId="33" Name="operand" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
@@ -252,12 +272,13 @@
     </Access>
     <Access Scope="GlobalVariable" UId="26">
       <Symbol>
-        <Component Name="Clock_10Hz" />
+        <Component Name="AlwaysFALSE" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="27">
       <Symbol>
-        <Component Name="bPulsa" />
+        <Component Name="Data" />
+        <Component Name="clock" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="28">
@@ -299,7 +320,7 @@
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Call UId="37">
-      <CallInfo Name="logSignalResetDaily" BlockType="FB">
+      <CallInfo Name="logBoolean2Months" BlockType="FB">
         <Instance Scope="GlobalVariable" UId="38">
           <Component Name="logSignalResetDaily_DB" />
         </Instance>
@@ -454,8 +475,7 @@
     </Access>
     <Access Scope="GlobalVariable" UId="27">
       <Symbol>
-        <Component Name="Data" />
-        <Component Name="Second" />
+        <Component Name="rREturn" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="28">
@@ -481,7 +501,7 @@
       <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
     </Part>
     <Call UId="33">
-      <CallInfo Name="logAnalogResetDaily" BlockType="FB">
+      <CallInfo Name="logAnalog2Months" BlockType="FB">
         <Instance Scope="GlobalVariable" UId="34">
           <Component Name="logAnalogResetDaily_DB" />
         </Instance>
@@ -866,7 +886,133 @@
       </SW.Blocks.CompileUnit>
       <SW.Blocks.CompileUnit ID="21" CompositionName="CompileUnits">
         <AttributeList>
-          <NetworkSource />
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="LiteralConstant" UId="21">
+      <Constant>
+        <ConstantType>USInt</ConstantType>
+        <ConstantValue>6</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="22">
+      <Constant>
+        <ConstantType>USInt</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>USInt</ConstantType>
+        <ConstantValue>6</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="24">
+      <Constant>
+        <ConstantType>USInt</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="25">
+      <Constant>
+        <ConstantType>USInt</ConstantType>
+        <ConstantValue>3</ConstantValue>
+      </Constant>
+    </Access>
+    <Call UId="26">
+      <CallInfo Name="LGF_TimerSwitch" BlockType="FB">
+        <Instance Scope="GlobalVariable" UId="27">
+          <Component Name="LGF_TimerSwitch_DB" />
+        </Instance>
+        <Parameter Name="onMonth" Section="Input" Type="USInt" />
+        <Parameter Name="onDay" Section="Input" Type="USInt" />
+        <Parameter Name="onWeekday" Section="Input" Type="USInt" />
+        <Parameter Name="onHour" Section="Input" Type="USInt" />
+        <Parameter Name="onMinute" Section="Input" Type="USInt" />
+        <Parameter Name="offMonth" Section="Input" Type="USInt" />
+        <Parameter Name="offDay" Section="Input" Type="USInt" />
+        <Parameter Name="offWeekday" Section="Input" Type="USInt" />
+        <Parameter Name="offHour" Section="Input" Type="USInt" />
+        <Parameter Name="offMinute" Section="Input" Type="USInt" />
+        <Parameter Name="mode" Section="Input" Type="USInt" />
+        <Parameter Name="signal" Section="Output" Type="Bool" />
+        <Parameter Name="actLocalTime" Section="Output" Type="DTL" />
+        <Parameter Name="error" Section="Output" Type="Bool" />
+        <Parameter Name="status" Section="Output" Type="Word" />
+        <Parameter Name="subFunctionStatus" Section="Output" Type="Word" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="40">
+      <OpenCon UId="28" />
+      <NameCon UId="26" Name="en" />
+    </Wire>
+    <Wire UId="41">
+      <OpenCon UId="29" />
+      <NameCon UId="26" Name="onMonth" />
+    </Wire>
+    <Wire UId="42">
+      <OpenCon UId="30" />
+      <NameCon UId="26" Name="onDay" />
+    </Wire>
+    <Wire UId="43">
+      <OpenCon UId="31" />
+      <NameCon UId="26" Name="onWeekday" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="21" />
+      <NameCon UId="26" Name="onHour" />
+    </Wire>
+    <Wire UId="45">
+      <IdentCon UId="22" />
+      <NameCon UId="26" Name="onMinute" />
+    </Wire>
+    <Wire UId="46">
+      <OpenCon UId="32" />
+      <NameCon UId="26" Name="offMonth" />
+    </Wire>
+    <Wire UId="47">
+      <OpenCon UId="33" />
+      <NameCon UId="26" Name="offDay" />
+    </Wire>
+    <Wire UId="48">
+      <OpenCon UId="34" />
+      <NameCon UId="26" Name="offWeekday" />
+    </Wire>
+    <Wire UId="49">
+      <IdentCon UId="23" />
+      <NameCon UId="26" Name="offHour" />
+    </Wire>
+    <Wire UId="50">
+      <IdentCon UId="24" />
+      <NameCon UId="26" Name="offMinute" />
+    </Wire>
+    <Wire UId="51">
+      <IdentCon UId="25" />
+      <NameCon UId="26" Name="mode" />
+    </Wire>
+    <Wire UId="52">
+      <NameCon UId="26" Name="signal" />
+      <OpenCon UId="35" />
+    </Wire>
+    <Wire UId="53">
+      <NameCon UId="26" Name="actLocalTime" />
+      <OpenCon UId="36" />
+    </Wire>
+    <Wire UId="54">
+      <NameCon UId="26" Name="error" />
+      <OpenCon UId="37" />
+    </Wire>
+    <Wire UId="55">
+      <NameCon UId="26" Name="status" />
+      <OpenCon UId="38" />
+    </Wire>
+    <Wire UId="56">
+      <NameCon UId="26" Name="subFunctionStatus" />
+      <OpenCon UId="39" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
           <ProgrammingLanguage>FBD</ProgrammingLanguage>
         </AttributeList>
         <ObjectList>
@@ -892,9 +1038,921 @@
           </MultilingualText>
         </ObjectList>
       </SW.Blocks.CompileUnit>
-      <MultilingualText ID="26" CompositionName="Title">
+      <SW.Blocks.CompileUnit ID="26" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="R_TRIG_DB" />
+        <Component Name="Q" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="22">
+      <Constant>
+        <ConstantType>Real</ConstantType>
+        <ConstantValue>10.0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Real</ConstantType>
+        <ConstantValue>100.0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="rREturn" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="error" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="status" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="27">
+      <Symbol>
+        <Component Name="subfunctionStatus" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="28">
+      <Constant>
+        <ConstantType>Real</ConstantType>
+        <ConstantValue>0.0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="29">
+      <Constant>
+        <ConstantType>Real</ConstantType>
+        <ConstantValue>100.0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="30">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Return2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="31">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Err" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="32">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="satus2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="33">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="status3" />
+      </Symbol>
+    </Access>
+    <Call UId="34">
+      <CallInfo Name="LGF_RandomRange_Real" BlockType="FC">
+        <Parameter Name="minValue" Section="Input" Type="Real" />
+        <Parameter Name="maxValue" Section="Input" Type="Real" />
+        <Parameter Name="Ret_Val" Section="Return" Type="Real" />
+        <Parameter Name="error" Section="Output" Type="Bool" />
+        <Parameter Name="status" Section="Output" Type="Word" />
+        <Parameter Name="subfunctionStatus" Section="Output" Type="Word" />
+      </CallInfo>
+    </Call>
+    <Call UId="35">
+      <CallInfo Name="LGF_RandomRange_Real" BlockType="FC">
+        <Parameter Name="minValue" Section="Input" Type="Real" />
+        <Parameter Name="maxValue" Section="Input" Type="Real" />
+        <Parameter Name="Ret_Val" Section="Return" Type="Real" />
+        <Parameter Name="error" Section="Output" Type="Bool" />
+        <Parameter Name="status" Section="Output" Type="Word" />
+        <Parameter Name="subfunctionStatus" Section="Output" Type="Word" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="36">
+      <IdentCon UId="21" />
+      <NameCon UId="34" Name="en" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="22" />
+      <NameCon UId="34" Name="minValue" />
+    </Wire>
+    <Wire UId="38">
+      <IdentCon UId="23" />
+      <NameCon UId="34" Name="maxValue" />
+    </Wire>
+    <Wire UId="39">
+      <NameCon UId="34" Name="Ret_Val" />
+      <IdentCon UId="24" />
+    </Wire>
+    <Wire UId="40">
+      <NameCon UId="34" Name="error" />
+      <IdentCon UId="25" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="34" Name="status" />
+      <IdentCon UId="26" />
+    </Wire>
+    <Wire UId="42">
+      <NameCon UId="34" Name="subfunctionStatus" />
+      <IdentCon UId="27" />
+    </Wire>
+    <Wire UId="43">
+      <NameCon UId="34" Name="eno" />
+      <NameCon UId="35" Name="en" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="28" />
+      <NameCon UId="35" Name="minValue" />
+    </Wire>
+    <Wire UId="45">
+      <IdentCon UId="29" />
+      <NameCon UId="35" Name="maxValue" />
+    </Wire>
+    <Wire UId="46">
+      <NameCon UId="35" Name="Ret_Val" />
+      <IdentCon UId="30" />
+    </Wire>
+    <Wire UId="47">
+      <NameCon UId="35" Name="error" />
+      <IdentCon UId="31" />
+    </Wire>
+    <Wire UId="48">
+      <NameCon UId="35" Name="status" />
+      <IdentCon UId="32" />
+    </Wire>
+    <Wire UId="49">
+      <NameCon UId="35" Name="subfunctionStatus" />
+      <IdentCon UId="33" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
         <ObjectList>
-          <MultilingualTextItem ID="27" CompositionName="Items">
+          <MultilingualText ID="27" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="28" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="29" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="2B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="Clock_1Hz" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Mothercores" />
+        <Component Name="Current" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="minValue" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="minValueIndex" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="maxValue" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="maxValueIndex" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="27">
+      <Symbol>
+        <Component Name="error_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="28">
+      <Symbol>
+        <Component Name="status(1)" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="29">
+      <Symbol>
+        <Component Name="subfunctionStatus(1)" />
+      </Symbol>
+    </Access>
+    <Call UId="30">
+      <CallInfo Name="LGF_SearchMinMax" BlockType="FC">
+        <Parameter Name="variableArray" Section="Input" Type="Variant" />
+        <Parameter Name="minValue" Section="Output" Type="Variant" />
+        <Parameter Name="minValueIndex" Section="Output" Type="DInt" />
+        <Parameter Name="maxValue" Section="Output" Type="Variant" />
+        <Parameter Name="maxValueIndex" Section="Output" Type="DInt" />
+        <Parameter Name="error" Section="Output" Type="Bool" />
+        <Parameter Name="status" Section="Output" Type="Word" />
+        <Parameter Name="subfunctionStatus" Section="Output" Type="Word" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="31">
+      <IdentCon UId="21" />
+      <NameCon UId="30" Name="en" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="22" />
+      <NameCon UId="30" Name="variableArray" />
+    </Wire>
+    <Wire UId="33">
+      <NameCon UId="30" Name="minValue" />
+      <IdentCon UId="23" />
+    </Wire>
+    <Wire UId="34">
+      <NameCon UId="30" Name="minValueIndex" />
+      <IdentCon UId="24" />
+    </Wire>
+    <Wire UId="35">
+      <NameCon UId="30" Name="maxValue" />
+      <IdentCon UId="25" />
+    </Wire>
+    <Wire UId="36">
+      <NameCon UId="30" Name="maxValueIndex" />
+      <IdentCon UId="26" />
+    </Wire>
+    <Wire UId="37">
+      <NameCon UId="30" Name="error" />
+      <IdentCon UId="27" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="30" Name="status" />
+      <IdentCon UId="28" />
+    </Wire>
+    <Wire UId="39">
+      <NameCon UId="30" Name="subfunctionStatus" />
+      <IdentCon UId="29" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="2C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2E" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="30" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="log_enable" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="log_triggerentry" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="log_clearlog" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="log_deletelog" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="log_parameter" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="Mothercores" />
+        <Component Name="Last" />
+      </Symbol>
+    </Access>
+    <Call UId="27">
+      <CallInfo Name="LGF_DataLogC" BlockType="FB">
+        <Instance Scope="GlobalVariable" UId="28">
+          <Component Name="LGF_DataLogC_DB" />
+        </Instance>
+        <Parameter Name="enable" Section="Input" Type="Bool" />
+        <Parameter Name="name" Section="Input" Type="String" />
+        <Parameter Name="triggerLogEntry" Section="Input" Type="Bool" />
+        <Parameter Name="clearLog" Section="Input" Type="Bool" />
+        <Parameter Name="deleteLog" Section="Input" Type="Bool" />
+        <Parameter Name="parameter" Section="Input" Type="&quot;LGF_typeDataLogParameter&quot;" />
+        <Parameter Name="valid" Section="Output" Type="Bool" />
+        <Parameter Name="busy" Section="Output" Type="Bool" />
+        <Parameter Name="error" Section="Output" Type="Bool" />
+        <Parameter Name="status" Section="Output" Type="Word" />
+        <Parameter Name="writeEntryDone" Section="Output" Type="Bool" />
+        <Parameter Name="clearLogDone" Section="Output" Type="Bool" />
+        <Parameter Name="deleteLogDone" Section="Output" Type="Bool" />
+        <Parameter Name="lastEntryReached" Section="Output" Type="Bool" />
+        <Parameter Name="noOfEntries" Section="Output" Type="UDInt" />
+        <Parameter Name="diagnostics" Section="Output" Type="&quot;LGF_typeDiagnostics&quot;" />
+        <Parameter Name="data" Section="InOut" Type="Variant" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="41">
+      <OpenCon UId="29" />
+      <NameCon UId="27" Name="en" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="21" />
+      <NameCon UId="27" Name="enable" />
+    </Wire>
+    <Wire UId="43">
+      <OpenCon UId="30" />
+      <NameCon UId="27" Name="name" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="22" />
+      <NameCon UId="27" Name="triggerLogEntry" />
+    </Wire>
+    <Wire UId="45">
+      <IdentCon UId="23" />
+      <NameCon UId="27" Name="clearLog" />
+    </Wire>
+    <Wire UId="46">
+      <IdentCon UId="24" />
+      <NameCon UId="27" Name="deleteLog" />
+    </Wire>
+    <Wire UId="47">
+      <IdentCon UId="25" />
+      <NameCon UId="27" Name="parameter" />
+    </Wire>
+    <Wire UId="48">
+      <IdentCon UId="26" />
+      <NameCon UId="27" Name="data" />
+    </Wire>
+    <Wire UId="49">
+      <NameCon UId="27" Name="valid" />
+      <OpenCon UId="31" />
+    </Wire>
+    <Wire UId="50">
+      <NameCon UId="27" Name="busy" />
+      <OpenCon UId="32" />
+    </Wire>
+    <Wire UId="51">
+      <NameCon UId="27" Name="error" />
+      <OpenCon UId="33" />
+    </Wire>
+    <Wire UId="52">
+      <NameCon UId="27" Name="status" />
+      <OpenCon UId="34" />
+    </Wire>
+    <Wire UId="53">
+      <NameCon UId="27" Name="writeEntryDone" />
+      <OpenCon UId="35" />
+    </Wire>
+    <Wire UId="54">
+      <NameCon UId="27" Name="clearLogDone" />
+      <OpenCon UId="36" />
+    </Wire>
+    <Wire UId="55">
+      <NameCon UId="27" Name="deleteLogDone" />
+      <OpenCon UId="37" />
+    </Wire>
+    <Wire UId="56">
+      <NameCon UId="27" Name="lastEntryReached" />
+      <OpenCon UId="38" />
+    </Wire>
+    <Wire UId="57">
+      <NameCon UId="27" Name="noOfEntries" />
+      <OpenCon UId="39" />
+    </Wire>
+    <Wire UId="58">
+      <NameCon UId="27" Name="diagnostics" />
+      <OpenCon UId="40" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="31" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="32" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="33" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="34" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="35" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="rREturn" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Data" />
+        <Component Name="clock" />
+      </Symbol>
+    </Access>
+    <Call UId="23">
+      <CallInfo Name="LGF_Frequency" BlockType="FB">
+        <Instance Scope="GlobalVariable" UId="24">
+          <Component Name="LGF_Frequency_DB" />
+        </Instance>
+        <Parameter Name="frequency" Section="Input" Type="Real" />
+        <Parameter Name="pulsePauseRatio" Section="Input" Type="Real" />
+        <Parameter Name="clock" Section="Output" Type="Bool" />
+        <Parameter Name="countdown" Section="Output" Type="Time" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="28">
+      <OpenCon UId="25" />
+      <NameCon UId="23" Name="en" />
+    </Wire>
+    <Wire UId="29">
+      <IdentCon UId="21" />
+      <NameCon UId="23" Name="frequency" />
+    </Wire>
+    <Wire UId="30">
+      <OpenCon UId="26" />
+      <NameCon UId="23" Name="pulsePauseRatio" />
+    </Wire>
+    <Wire UId="31">
+      <NameCon UId="23" Name="clock" />
+      <IdentCon UId="22" />
+    </Wire>
+    <Wire UId="32">
+      <NameCon UId="23" Name="countdown" />
+      <OpenCon UId="27" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="36" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="37" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="38" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="39" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="3A" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Req" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Records" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="name" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="id" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="data" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Done" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="27">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Busy" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="28">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Error" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="29">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="status" />
+      </Symbol>
+    </Access>
+    <Part Name="DataLogCreate" Version="1.0" UId="30">
+      <Instance Scope="GlobalVariable" UId="31">
+        <Component Name="DataLogCreate_DB" />
+      </Instance>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="36">
+      <OpenCon UId="32" />
+      <NameCon UId="30" Name="en" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="21" />
+      <NameCon UId="30" Name="REQ" />
+    </Wire>
+    <Wire UId="38">
+      <IdentCon UId="22" />
+      <NameCon UId="30" Name="RECORDS" />
+    </Wire>
+    <Wire UId="39">
+      <OpenCon UId="33" />
+      <NameCon UId="30" Name="FORMAT" />
+    </Wire>
+    <Wire UId="40">
+      <OpenCon UId="34" />
+      <NameCon UId="30" Name="TIMESTAMP" />
+    </Wire>
+    <Wire UId="41">
+      <IdentCon UId="23" />
+      <NameCon UId="30" Name="NAME" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="24" />
+      <NameCon UId="30" Name="ID" />
+    </Wire>
+    <Wire UId="43">
+      <OpenCon UId="35" />
+      <NameCon UId="30" Name="HEADER" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="25" />
+      <NameCon UId="30" Name="DATA" />
+    </Wire>
+    <Wire UId="45">
+      <NameCon UId="30" Name="DONE" />
+      <IdentCon UId="26" />
+    </Wire>
+    <Wire UId="46">
+      <NameCon UId="30" Name="BUSY" />
+      <IdentCon UId="27" />
+    </Wire>
+    <Wire UId="47">
+      <NameCon UId="30" Name="ERROR" />
+      <IdentCon UId="28" />
+    </Wire>
+    <Wire UId="48">
+      <NameCon UId="30" Name="STATUS" />
+      <IdentCon UId="29" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="3B" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="3C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="3D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="3E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="3F" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Done" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="enable" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="enable" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="Clock_1Hz" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="id" />
+      </Symbol>
+    </Access>
+    <Part Name="SCoil" UId="26" />
+    <Part Name="DataLogWrite" Version="1.0" UId="27">
+      <Instance Scope="GlobalVariable" UId="28">
+        <Component Name="DataLogWrite_DB" />
+      </Instance>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="33">
+      <IdentCon UId="21" />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+    <Wire UId="34">
+      <IdentCon UId="22" />
+      <NameCon UId="26" Name="operand" />
+    </Wire>
+    <Wire UId="35">
+      <IdentCon UId="23" />
+      <NameCon UId="27" Name="en" />
+    </Wire>
+    <Wire UId="36">
+      <IdentCon UId="24" />
+      <NameCon UId="27" Name="REQ" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="25" />
+      <NameCon UId="27" Name="ID" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="27" Name="DONE" />
+      <OpenCon UId="29" />
+    </Wire>
+    <Wire UId="39">
+      <NameCon UId="27" Name="BUSY" />
+      <OpenCon UId="30" />
+    </Wire>
+    <Wire UId="40">
+      <NameCon UId="27" Name="ERROR" />
+      <OpenCon UId="31" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="27" Name="STATUS" />
+      <OpenCon UId="32" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="40" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="41" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="42" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="43" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="44" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="rREturn" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="data" />
+        <Component Name="current temp" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="Return2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="Datalogging" />
+        <Component Name="data" />
+        <Component Name="current pressure" />
+      </Symbol>
+    </Access>
+    <Part Name="Move" UId="25" DisabledENO="true">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="26" DisabledENO="true">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="28">
+      <OpenCon UId="27" />
+      <NameCon UId="25" Name="en" />
+    </Wire>
+    <Wire UId="29">
+      <IdentCon UId="21" />
+      <NameCon UId="25" Name="in" />
+    </Wire>
+    <Wire UId="30">
+      <NameCon UId="25" Name="out1" />
+      <IdentCon UId="22" />
+    </Wire>
+    <Wire UId="31">
+      <NameCon UId="25" Name="eno" />
+      <NameCon UId="26" Name="en" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="23" />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+    <Wire UId="33">
+      <NameCon UId="26" Name="out1" />
+      <IdentCon UId="24" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="45" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="46" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="47" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="48" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="49" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource />
+          <ProgrammingLanguage>FBD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="4A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="4B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="4C" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="4D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="4E" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="4F" CompositionName="Items">
             <AttributeList>
               <Culture>en-US</Culture>
               <Text>"Main Program Sweep (Cycle)"</Text>

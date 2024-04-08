@@ -1,4 +1,4 @@
-﻿FUNCTION_BLOCK "logAnalogResetDaily"
+﻿FUNCTION_BLOCK "logAnalog2Months"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 
@@ -36,6 +36,8 @@ VERSION : 0.1
 
 
 BEGIN
+	//Sparar värdet av rLogSignal i aCurrentMonth under position för dagens datum, vid månadsskifte flyttas innehållet till aLastMonth och aCurrentMonth nollställs
+	
 	REGION Initialize
 	    IF #bFirstScan THEN
 	        #rLogSignal := 0.0;
@@ -52,17 +54,22 @@ BEGIN
 	#R_TRIG_Month(CLK := #bMonthShift);
 	
 	
-	REGION Loop log values
+	REGION Store values in array at trigger
 	    IF #R_TRIG_Reset.Q AND #iDay > 0 AND #iDay <= #maxDays THEN
 	        #aCurrentMonth[#iDay] := #rInValue;
 	        #rAverageSignal := 0.0;
 	        
 	        FOR #i2 := 1 TO #maxDays BY 1 DO //Calculate average signal
+	            
 	            #rAverageSignal := #rAverageSignal + #aCurrentMonth[#i2];
+	            IF #aCurrentMonth[#i2] = 0 THEN
+	                #rAverageSignal := #rAverageSignal / #i2;
+	                EXIT;
+	            END_IF;
 	        END_FOR;
-	        #rAverageSignal := #rAverageSignal / (#maxDays);
+	        
 	    END_IF;
-	END_REGION
+	END_REGION 
 	
 	REGION New month
 	    IF #R_TRIG_Month.Q THEN
